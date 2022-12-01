@@ -29,8 +29,19 @@ const createUser = async (displayName, email, password, image) => {
   return { type: null, message: newUserCreated };
 };
 
+const getUsers = async () => {
+  const result = await User.findAll({
+    attributes: ['id', ['display_name', 'displayName'], 'email', 'image'],
+  });
+
+  if (!result) return { type: 'NOT_FOUND', message: 'User not found' };
+
+  return { type: null, message: result };
+};
+
 module.exports = {
   getEmail,
   checkUser,
   createUser,
+  getUsers,
 };
