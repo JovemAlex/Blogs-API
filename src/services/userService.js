@@ -39,9 +39,19 @@ const getUsers = async () => {
   return { type: null, message: result };
 };
 
+const getByPk = async (id) => {
+  const result = await User.findByPk(id, {
+    attributes: ['id', ['display_name', 'displayName'], 'email', 'image'],
+  });
+  if (!result) return { type: 'NOT_FOUND', message: 'User does not exist' };
+
+  return { type: null, message: result };
+};
+
 module.exports = {
   getEmail,
   checkUser,
   createUser,
   getUsers,
+  getByPk,
 };
