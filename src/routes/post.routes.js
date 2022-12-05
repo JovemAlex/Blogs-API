@@ -6,5 +6,6 @@ const tokenMiddleware = require('../middlewares/tokenValidation');
 const router = express.Router();
 
 router.get('/', tokenMiddleware, postController.getAllPosts);
+router.get('/:id', tokenMiddleware, postController.getPostById);
 
 module.exports = router;
